@@ -44,7 +44,7 @@ with st.container():
             reset_button = st.form_submit_button(label='Restart')
 
             if submit_button and user_text:
-                st.session_state.prompt += f"Please change the email as follows: {user_text} \n\n remember that the email is sent by {st.session_state.user_name}. Never mention that you use speech acts."
+                st.session_state.prompt += f"Please change the email as follows: {user_text} \n\n remember that the email is sent by \n {st.session_state.user_name}. Never mention that you use speech acts."
                 with st.spinner('Modifying email...'):
                     st.session_state.email = cl.send_message(st.session_state.prompt)
                 st.experimental_rerun()
