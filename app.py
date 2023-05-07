@@ -20,11 +20,11 @@ with st.container():
 # Container 2: User Input
 with st.container():
     if st.session_state.email == "":
-        user_name_input = st.text_input("What is your name:", value=st.session_state.user_name_input, key="user_name_input")
-        destinatary = st.text_input("Who will receive this email:", value=st.session_state.destinatary, key="destinatary")
-        user_speech_act = st.selectbox("The main purpose of the message is to make:", ['an assertion','a promise', 'a request'], value=st.session_state.user_multiselect_speech_act, key="user_multiselect_speech_act")
-        message_user = st.text_input("What is the core message you want to send:", value=st.session_state.message_user, key="message_user")
-        message_tone = st.selectbox("What is the tone of the message:", ['formal','informal', 'neutral', 'urgent'], value=st.session_state.message_tone, key="message_tone")
+        user_name_input = st.text_input("What is your name:", value=(st.session_state.user_name_input if st.session_state.user_name_input else ""), key="user_name_input")
+        destinatary = st.text_input("Who will receive this email:", value=(st.session_state.destinatary if st.session_state.destinatary else ""), key="destinatary")
+        user_speech_act = st.selectbox("The main purpose of the message is to make:", ['an assertion','a promise', 'a request'], value=(st.session_state.user_multiselect_speech_act if st.session_state.user_multiselect_speech_act else ""), key="user_multiselect_speech_act")
+        message_user = st.text_input("What is the core message you want to send:", value=(st.session_state.message_user if st.session_state.message_user else ""), key="message_user")
+        message_tone = st.selectbox("What is the tone of the message:", ['formal','informal', 'neutral', 'urgent'], value=(st.session_state.message_tone if st.session_state.message_tone else ""), key="message_tone")
         submit_button_container_2 = st.button(label='Send')
 
         if submit_button_container_2 and user_name_input and destinatary and user_speech_act and message_user and message_tone:
@@ -34,11 +34,11 @@ with st.container():
                 st.session_state.email = cl.send_message(st.session_state.prompt)
 
             # Clear input fields by setting their session state to None
-            st.session_state.user_name_input = None
-            st.session_state.destinatary = None
-            st.session_state.user_multiselect_speech_act = None
-            st.session_state.message_user = None
-            st.session_state.message_tone = None
+            st.session_state.user_name_input = ""
+            st.session_state.destinatary = ""
+            st.session_state.user_multiselect_speech_act = ""
+            st.session_state.message_user = ""
+            st.session_state.message_tone = ""
 
 
 # Container 3: Response
