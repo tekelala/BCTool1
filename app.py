@@ -50,7 +50,7 @@ with st.container():
             submit_button = st.form_submit_button(label='Send')
             reset_button = st.form_submit_button(label='Restart')
 
-           if submit_button and user_text:
+            if submit_button and user_text:
                 st.session_state.prompt += f"Please change the email as follows: {user_text} \n\n remember that the email is sent by \n {st.session_state.user_name}. Write only the email content. Never mention that you use speech acts or that you use a tool to write the email."
                 with st.spinner('Modifying email...'):
                     st.session_state.email = cl.send_message(st.session_state.prompt)
