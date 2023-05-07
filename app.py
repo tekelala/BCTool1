@@ -15,26 +15,25 @@ with st.container():
 # Container 2: User Input
 with st.container():
     if st.session_state.email == "":
-        with st.form(key='user_input_form'):
-            user_name_input = st.text_input("What is your name:", key="user_name_input")
-            destinatary = st.text_input("Who will receive this email:", key="destinatary")
-            user_speech_act = st.selectbox("The main purpose of the message is to make:", ['an assertion','a promise', 'a request'], key="user_multiselect_speech_act")
-            message_user = st.text_input("What is the core message you want to send:", key="message_user")
-            message_tone = st.selectbox("What is the tone of the message:", ['formal','informal', 'neutral', 'urgent'], key="message_tone")
-            submit_button_container_2 = st.form_submit_button(label='Send')
+        user_name_input = st.text_input("What is your name:", key="user_name_input")
+        destinatary = st.text_input("Who will receive this email:", key="destinatary")
+        user_speech_act = st.selectbox("The main purpose of the message is to make:", ['an assertion','a promise', 'a request'], key="user_multiselect_speech_act")
+        message_user = st.text_input("What is the core message you want to send:", key="message_user")
+        message_tone = st.selectbox("What is the tone of the message:", ['formal','informal', 'neutral', 'urgent'], key="message_tone")
+        submit_button_container_2 = st.button(label='Send')
 
-            if submit_button_container_2 and user_name_input and destinatary and user_speech_act and message_user and message_tone:
-                st.session_state.user_name = user_name_input
-                st.session_state.prompt = f"role: you are a communications expert using the speech acts of Fernando Flores \n  you are going to write an email to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} the email should deliver the following message {message_user}.\n\n Best regards,\n\n {st.session_state.user_name}. Write only the email content. Never mention that you use speech acts or that you use a tool to write the email."
-                with st.spinner('Generating email...'):
-                    st.session_state.email = cl.send_message(st.session_state.prompt)
-                # Clear the text inputs after hitting send
-                st.session_state.user_name_input = ""
-                st.session_state.destinatary = ""
-                st.session_state.user_multiselect_speech_act = ""
-                st.session_state.message_user = ""
-                st.session_state.message_tone = ""
-                st.experimental_rerun()
+        if submit_button_container_2 and user_name_input and destinatary and user_speech_act and message_user and message_tone:
+            st.session_state.user_name = user_name_input
+            st.session_state.prompt = f"You are a communications expert using the speech acts of Fernando FLores and you are going to write an email to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} the email should transmit the following message {message_user}.\n\nBest regards,\n\n {st.session_state.user_name} Never mention that you use speech acts or that you use a tool to write the email."
+            with st.spinner('Generating email...'):
+                st.session_state.email = cl.send_message(st.session_state.prompt)
+
+            # Clear input fields
+            st.session_state.user_name_input = ""
+            st.session_state.destinatary = ""
+            st.session_state.user_multiselect_speech_act = ""
+            st.session_state.message_user = ""
+            st.session_state.message_tone = ""
 
 # Container 3: Response
 with st.container():
