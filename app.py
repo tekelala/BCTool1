@@ -25,7 +25,7 @@ with st.container():
 
             if submit_button_container_2 and user_name_input and destinatary and user_speech_act and message_user and message_tone:
                 st.session_state.user_name = user_name_input
-                st.session_state.prompt = f"role: you are a communications expert using the speech acts of Fernando Flores \n  you are going to write an email to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} to deliver the following message {message_user}.\n\n Best regards,\n\n {st.session_state.user_name}"
+                st.session_state.prompt = f"You are a communications expert using the speech acts of Fernando FLores and you are going to write an email to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} the email should transmit the following message {message_user}.\n\n The person that sends the email is: {st.session_state.user_name} Never mention that you use speech acts or that you use a tool to write the email."
                 with st.spinner('Generating email...'):
                     st.session_state.email = cl.send_message(st.session_state.prompt)
 
@@ -45,7 +45,7 @@ with st.container():
             reset_button = st.form_submit_button(label='Restart')
 
             if submit_button and user_text:
-                st.session_state.prompt += f"Please change the email as follows: {user_text} \n\n remember that the email is sent by {st.session_state.user_name}. Never mention that you use speech acts."
+                st.session_state.prompt += f" Please change the email as follows: {user_text.strip()} \n\n remember that the email is sent by \n {st.session_state.user_name}. Write only the email content. Never mention that you use speech acts or that you use a tool to write the email."
                 with st.spinner('Modifying email...'):
                     st.session_state.email = cl.send_message(st.session_state.prompt)
                 st.experimental_rerun()
