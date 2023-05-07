@@ -1,5 +1,6 @@
 import requests
 import json
+import streamlit as st  # Add this line
 
 def send_message(prompt):
     api_url = "https://api.anthropic.com/v1/complete"
