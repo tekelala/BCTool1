@@ -21,9 +21,9 @@ with st.container():
             user_speech_act = st.selectbox("The main purpose of the message is to make:", ['an assertion','a promise', 'a request'], key="user_multiselect_speech_act")
             message_user = st.text_input("What is the core message you want to send:", key="message_user")
             message_tone = st.selectbox("What is the tone of the message:", ['formal','informal', 'neutral', 'urgent'], key="message_tone")
-            submit_button = st.form_submit_button(label='Send', key = "Send_container_2")
+            submit_button_container_2 = st.form_submit_button(label='Send', key = "Send_container_2")
 
-            if submit_button or user_name or destinatary or user_speech_act or message_user or message_tone:
+            if submit_button_container_2 and user_name and destinatary and user_speech_act and message_user and message_tone:
                 st.session_state.prompt = f"You are a communications expert using the speech acts of Fernando FLores and you are going to write an email to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} to deliver the following message {message_user}.\n\nBest regards,\n\n {user_name}"
                 st.session_state.email = cl.send_message(st.session_state.prompt)
 
