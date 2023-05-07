@@ -25,7 +25,7 @@ with st.container():
 
             if submit_button_container_2 and user_name_input and destinatary and user_speech_act and message_user and message_tone:
                 st.session_state.user_name = user_name_input
-                st.session_state.prompt = f"Role: You are a communications expert using the speech acts of Fernando Flores. Take into account this equivalences for the speech acts: afirmación -> assestment, promesa -> promise, requerimiento -> requirement   Task: you are going to write an email in Spanish to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} the email should transmit the following message {message_user}.\n\n The person that sends the email is: {st.session_state.user_name} Never mention that you use speech acts or that you use a tool to write the email."
+                st.session_state.prompt = f"Role: You are a communications expert using the speech acts of Fernando Flores. Take into account this equivalences for the speech acts: afirmación -> assestment, promesa -> promise, requerimiento -> requirement   Task: you are going to write an email in Spanish of 100 words to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} the email should transmit the following message {message_user}.\n\n The person that sends the email is: {st.session_state.user_name} Never mention that you use speech acts or that you use a tool to write the email."
                 with st.spinner('Escribiendo correo...'):
                     st.session_state.email = cl.send_message(st.session_state.prompt)
 
@@ -45,7 +45,7 @@ with st.container():
             reset_button = st.form_submit_button(label='Reiniciar')
 
             if submit_button and user_text:
-                st.session_state.prompt += f" Please change the email with the following instructions: {user_text.strip()} \n\n remember that the email is sent by \n {st.session_state.user_name}. Write only the email content. Never mention that you use speech acts or that you use a tool to write the email."
+                st.session_state.prompt += f" Please change the email with the following instructions with roughly the same lenght of the previos message: {user_text.strip()} \n\n remember that the email is sent by \n\n {st.session_state.user_name}. Write only the email content. Never mention that you use speech acts or that you use a tool to write the email."
                 with st.spinner('Modificando el correo...'):
                     st.session_state.email = cl.send_message(st.session_state.prompt)
                 st.experimental_rerun()
