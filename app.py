@@ -25,9 +25,16 @@ with st.container():
 
             if submit_button_container_2 and user_name_input and destinatary and user_speech_act and message_user and message_tone:
                 st.session_state.user_name = user_name_input
-                st.session_state.prompt = f"role: you are a communications expert using the speech acts of Fernando Flores \n  Your mission:you are going to write an email to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} tone; the email should be written to  to deliver the following message {message_user}.\n\n Best regards,\n\n {st.session_state.user_name} Never mention that you use speech acts."
+                st.session_state.prompt = f"role: you are a communications expert using the speech acts of Fernando Flores \n  you are going to write an email to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} the email should deliver the following message {message_user}.\n\n Best regards,\n\n {st.session_state.user_name}. Write only the email content. Never mention that you use speech acts or that you use a tool to write the email."
                 with st.spinner('Generating email...'):
                     st.session_state.email = cl.send_message(st.session_state.prompt)
+                # Clear the text inputs after hitting send
+                st.session_state.user_name_input = ""
+                st.session_state.destinatary = ""
+                st.session_state.user_multiselect_speech_act = ""
+                st.session_state.message_user = ""
+                st.session_state.message_tone = ""
+                st.experimental_rerun()
 
 # Container 3: Response
 with st.container():
@@ -43,10 +50,12 @@ with st.container():
             submit_button = st.form_submit_button(label='Send')
             reset_button = st.form_submit_button(label='Restart')
 
-            if submit_button and user_text:
-                st.session_state.prompt += f"Please change the email as follows: {user_text} \n\n remember that the email is sent by \n {st.session_state.user_name}. Never mention that you use speech acts."
+           if submit_button and user_text:
+                st.session_state.prompt += f"Please change the email as follows: {user_text} \n\n remember that the email is sent by \n {st.session_state.user_name}. Write only the email content. Never mention that you use speech acts or that you use a tool to write the email."
                 with st.spinner('Modifying email...'):
                     st.session_state.email = cl.send_message(st.session_state.prompt)
+                # Clear the text input after hitting send
+                st.session_state.user_text = ""
                 st.experimental_rerun()
 
             if reset_button:
