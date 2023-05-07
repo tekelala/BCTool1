@@ -25,7 +25,7 @@ with st.container():
 
             if submit_button_container_2 and user_name_input and destinatary and user_speech_act and message_user and message_tone:
                 st.session_state.user_name = user_name_input
-                st.session_state.prompt = f"role: you are a communications expert using the speech acts of Fernando Flores \n  Your mission:you are going to write an email to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} tone; the email should be written to  to deliver the following message {message_user}.\n\n Best regards,\n\n {st.session_state.user_name}"
+                st.session_state.prompt = f"role: you are a communications expert using the speech acts of Fernando Flores \n  Your mission:you are going to write an email to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} tone; the email should be written to  to deliver the following message {message_user}.\n\n Best regards,\n\n {st.session_state.user_name} Never mention that you use speech acts."
                 with st.spinner('Generating email...'):
                     st.session_state.email = cl.send_message(st.session_state.prompt)
 
