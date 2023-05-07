@@ -35,7 +35,7 @@ with st.container():
         st.write(f"{st.session_state.email}")
 
 # Container 4: User Text and Buttons
-ith st.container():
+with st.container():
     if st.session_state.email != "":
         with st.form(key='user_text_form'):
             user_text = st.text_input("Do you want me to make any change to the message?", key="user_text")
