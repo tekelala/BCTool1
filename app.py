@@ -41,7 +41,7 @@ with st.container():
         st.write(f"Here is the email that was generated:")
         st.write(f"{st.session_state.email}")
 
- Container 4: User Text and Buttons
+# Container 4: User Text and Buttons
 with st.container():
     if st.session_state.email != "":
         with st.form(key='user_text_form'):
