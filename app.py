@@ -24,7 +24,7 @@ with st.container():
             submit_button_container_2 = st.form_submit_button(label='Send')
 
             if submit_button_container_2 and user_name and destinatary and user_speech_act and message_user and message_tone:
-                st.session_state.prompt = f"You are a communications expert using the speech acts of Fernando FLores and you are going to write an email to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} to deliver the following message {message_user}.\n\nBest regards,\n\n {user_name}"
+                st.session_state.prompt = f"role: you are a communications expert using the speech acts of Fernando Flores \n  you are going to write an email to {destinatary} with the following speech act: {user_speech_act}, with the following {message_tone} to deliver the following message {message_user}.\n\nBest regards,\n\n {user_name}"
                 st.session_state.email = cl.send_message(st.session_state.prompt)
 
 # Container 3: Response
