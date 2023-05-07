@@ -38,7 +38,7 @@ with st.container():
     if st.session_state.email != "":
         with st.form(key='user_text_form'):
             user_text = st.text_input("Do you want me to make any change to the message?", key="user_text")
-            submit_button = st.form_submit_button(label='Send', key="send_container_4")
+            submit_button = st.form_submit_button(label='Send')
             reset_button = st.form_submit_button(label='Restart')
 
             if submit_button and user_text:
